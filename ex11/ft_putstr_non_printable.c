@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acigerim <acigerim@student.42istanbul.com  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/01 21:15:59 by acigerim          #+#    #+#             */
+/*   Updated: 2022/09/09 15:00:41 by acigerim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
+
+void	printothers(char c)
+{
+	char	div;
+	char	mod;
+
+	div = c / 16 + '0';
+	mod = "0123456789abcdef"[c % 16];
+	write(1, "\\", 1);
+	write(1, &div, 1);
+	write(1, &mod, 1);
+}
+
+void	ft_putstr_non_printable(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != 0)
+	{
+		if (str[i] >= 32 && str[i] <= 127)
+			write(1, &str[i], 1);
+		else
+			printothers(str[i]);
+		i++;
+	}
+}
